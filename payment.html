@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Make Payment</title>
+    <style>
+
+    </style>
+</head>
+<body>
+    <div id="payment">
+        <h2>Enter Your Card Details</h2>
+        <form action="">
+            <input type="number" name="" id="cardnumber" placeholder="Card Number">
+            <input type="text" name="" id="expiredate" placeholder="MM/YY">
+            <input type="password" name="" id="cvv" placeholder="CVV">
+            <input type="text" name="" id="name" placeholder="Name">
+            <input type="submit" name="" id="submitbtn" value="Submit">
+        </form>
+    </div>
+</body>
+<script>
+    window.onload = function () {  
+        document.onkeydown = function (e) {  
+            return (e.which || e.keyCode) != 116;  
+        };  
+    } 
+    document.getElementById("payment").addEventListener('submit', payment)
+    function payment(){
+        event.preventDefault()
+        var cardnumber= document.getElementById('cardnumber').value
+        var expiredate= document.getElementById('expiredate').value
+        var cvv= document.getElementById('cvv').value
+        if(cardnumber.length !==16){
+            alert("Please Enter Correct Card Number")
+            console.log("error")
+        }
+        else if(expiredate.length !==4){
+            alert("Please Enter Correct Expire Date and Month")
+            console.log("error")
+        }
+        else if(cvv.length !==3){
+            alert("Please Enter Correct CVV")
+            console.log("error")
+        }
+        else{
+            var otpbtn= document.createElement("button")
+        otpbtn.innerText="Send OTP";
+        otpbtn.setAttribute("id","otpsms")
+        var otpsms= document.createElement("input")
+        otpsms.setAttribute("type", "number")
+        otpsms.setAttribute("id", "sms")
+        document.getElementById("submitbtn").remove()
+        document.getElementById('payment').append(otpbtn,otpsms)
+    }
+    document.getElementById('otpsms').addEventListener("click",function(){
+        alert("Otp sent successfully")
+        document.getElementById("otpsms").remove()
+        var submitpayment= document.createElement('button')
+        submitpayment.setAttribute('id','submitpaymentt')
+        submitpayment.innerText="Submit"
+        document.getElementById('payment').append(submitpayment)
+        alert("Your  OTP is 1234")
+        document.getElementById("submitpaymentt").addEventListener('click', function(){
+        var otpsms1= document.getElementById('sms').value
+        if(otpsms1 === '1234'){
+            
+            alert("Payment Successfull")
+            //  setTimeout()
+            window.location.href="./mens.html"
+        }
+        else{
+            alert("Wrong Creditionals")
+            location.reload()
+        }
+        // console.log(otpsms1)
+    })
+
+    })
+    
+        console.log(cardnumber,expiredate,cvv)
+    }
+</script>
+</html>

@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up</title>
+    <style>
+        body{
+            justify-items: center ;
+        }
+        #navbar{
+            display: flex;
+            flex-direction: row;
+            justify-content: space-around;
+            /* justify-content: center; */
+            background-color: black;
+            height: 50px;
+            text-align: center;
+        }
+        #navbar >div>a{
+            text-decoration: none;
+            padding: 10px;
+            margin: 30px;
+            color: aliceblue;
+            font-size: 25px;
+            /* height: 50px; */
+        }
+        #container>div {
+           text-align: center;
+           margin: 10px;
+           padding: 20px;
+           /* justify-content: center; */
+           /* justify-items: center; */
+        }
+        form{
+            margin: 0%;
+            padding: 0%;
+            /* justify-items: center; */
+        }
+        form>input {
+            /* margin: 50%; */
+            /* padding: 0%; */
+            display: block;
+            margin-bottom: 10px;
+            text-align: center;
+            height: 30px;
+            width: 200px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="navbar">
+        <div><a href="./signup.html">Sign Up</a></div>
+        <div><a href="./login.html">Log in</a></div>
+        <div><a href="./mens.html">Mens</a></div>
+        <div><a href="./womens.html">Womens</a></div>
+        <div><a href="./cart.html">Cart</a></div>
+    </div>
+    <div id="container">
+        <div id="signup">
+            <h1>Sign up</h1>
+            <center>
+                <form action="disabled">
+                    <input type="email" name="" id="email" placeholder="Enter Email">
+                    <input type="number" name="" id="mobnumber" placeholder="Enter Phone Number">
+                    <label for="" style="font-size: 15px;">Password must have 8 digit</label>
+                    <input type="password" name="" id="password" placeholder="Enter Password">
+                    <input type="submit" name="" id="siignup" value="Sign up">
+                </form>
+            </center>
+        </div>
+    </div>
+</body>
+<script>
+    // localStorage.clear()
+    document.getElementById("signup").addEventListener("submit", sing)
+    var signupdata;
+    if (JSON.parse(localStorage.getItem('singupdata')) == null) {
+        signupdata = []
+    }
+    else {
+        signupdata = JSON.parse(localStorage.getItem('singupdata'))
+        console.log(signupdata)
+    }
+    function sing() {
+        event.preventDefault()
+        var enteredemail= document.getElementById('email').value;
+        var  enteredphone= document.getElementById('mobnumber').value
+        var  enteredpassword= document.getElementById('password').value
+         if (enteredemail.length >10 && enteredphone.length=== 10 && enteredpassword.length > 7){
+             var dataobj = {
+                 email: enteredemail,
+                 phone:enteredphone ,
+                 password: enteredpassword
+             }
+             signupdata.push(dataobj)
+             localStorage.setItem('singupdata', JSON.stringify(signupdata))
+             alert('Sign Up Sucssfully')
+             window.location.href='./login.html'
+
+         }
+         else{
+                 alert('Please Fill All Data')
+
+         }
+        // if(dataobj.email == " " || dataobj.phone == ' ' || dataobj.password == ' '){
+        //     return
+        // }
+        // localStorage.removeItem('singupdata')
+    }
+</script>
+
+</html>

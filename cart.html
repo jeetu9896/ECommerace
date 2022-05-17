@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Cart</title>
+    <style>
+        #navbar {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-around;
+            /* justify-content: center; */
+            background-color: black;
+            height: 50px;
+            text-align: center;
+        }
+
+        #navbar>div>a {
+            text-decoration: none;
+            padding: 10px;
+            margin: 30px;
+            color: aliceblue;
+            font-size: 25px;
+            /* height: 50px; */
+        }
+        #container{
+            display: grid;
+            grid-template-columns: repeat(3,1fr);
+            gap: 30px;
+        }
+        #container>div{
+            border: 1px solid greenyellow;
+
+        }
+    </style>
+</head>
+
+<body>
+    <div id="navbar">
+        <div><a href="./signup.html">Sign Up</a></div>
+        <div><a href="./login.html">Log in</a></div>
+        <div><a href="./mens.html">Mens</a></div>
+        <div><a href="./womens.html">Womens</a></div>
+        <div><a href="./cart.html">Cart</a></div>
+    </div>
+    <h4></h4>
+    <button><a href="./payment.html">Make Payment</a></button>
+    <div id="container">
+    </div>
+</body>
+<script>
+    var cartData = JSON.parse(localStorage.getItem('cartData'))
+    var totalsum=cartData.reduce(function(sum,ele,index,arr){
+        return sum+ Number(ele.price)
+    },0)
+    document.querySelector('h4').innerText="You have"+" "+cartData.length+" items "+" in Your cart and total sum is "+totalsum
+    if (cartData == null) {
+        alert("Please Add Product")
+        window.location.href="mens.html"
+    }
+    else {
+
+        cartData.forEach((cartitem, cartindex) => {
+            var box = document.createElement('div')
+
+            var img = document.createElement('img')
+            img.src = cartitem.image_url
+
+            var name = document.createElement('h3')
+            name.textContent = cartitem.name
+
+            var price = document.createElement('p')
+            price.textContent = cartitem.price
+
+            var cartbutton = document.createElement('button')
+            cartbutton.innerText = "Remove Item"
+
+            box.append(img, name, price, cartbutton)
+
+            cartbutton.addEventListener('click', function () {
+                cartData.splice(cartindex,1)
+                localStorage.setItem('cartData', JSON.stringify(cartData))
+                alert("Item Remove Successfully")
+                window.location.reload()
+            })
+
+            document.getElementById('container').append(box)
+        })
+        // console.log(cartData)
+
+    }
+</script>
+
+</html>
