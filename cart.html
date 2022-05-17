@@ -45,8 +45,18 @@
         <div><a href="./womens.html">Womens</a></div>
         <div><a href="./cart.html">Cart</a></div>
     </div>
-    <h4></h4>
-    <button><a href="./payment.html">Make Payment</a></button>
+    <div>
+        <div>
+            <h4></h4>
+       <button><a href="./payment.html">Make Payment</a></button>
+        </div>
+    <br>
+    <div id="code">
+        <input type="text" name="" id="promocode">
+        <button id="appycode">Apply Promo Code</button>
+        </div>
+    </div>
+    <br>
     <div id="container">
     </div>
 </body>
@@ -55,7 +65,22 @@
     var totalsum=cartData.reduce(function(sum,ele,index,arr){
         return sum+ Number(ele.price)
     },0)
-    document.querySelector('h4').innerText="You have"+" "+cartData.length+" items "+" in Your cart and total sum is "+totalsum
+    document.querySelector('h4').innerText="You have"+" "+cartData.length+" items "+" in Your cart and total sum is "+ totalsum
+    document.getElementById("appycode").addEventListener("click",promo)
+    var f =true
+    function promo(event){
+        event.preventDefault()
+        var code= document.getElementById('promocode').value
+        if(code=="masai30" && f){
+            alert("You got 30% Disscount")
+            
+            totalsum=totalsum*70
+            totalsum=totalsum/100
+            f=false
+            document.querySelector('h4').innerText="You have"+" "+cartData.length+" items "+" in Your cart and total sum is "+ totalsum
+        }
+    }
+    // totalsum=totalsum
     if (cartData == null) {
         alert("Please Add Product")
         window.location.href="mens.html"

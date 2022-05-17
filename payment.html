@@ -6,19 +6,41 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Make Payment</title>
     <style>
-
+        #container{
+            width: 100%;
+            margin: auto;
+            display: flex;
+            flex-direction: column;
+        }
+        #container>div{
+            width: 30%;
+            margin: auto;
+        }
+        form{
+            width: 50%;
+            /* margin: auto; */
+            display: flex;
+            flex-direction: column;
+        }
+        #container>div>#otpsms{
+            width: 40%;
+            margin: auto;
+        }
+        
     </style>
 </head>
 <body>
-    <div id="payment">
-        <h2>Enter Your Card Details</h2>
-        <form action="">
-            <input type="number" name="" id="cardnumber" placeholder="Card Number">
-            <input type="text" name="" id="expiredate" placeholder="MM/YY">
-            <input type="password" name="" id="cvv" placeholder="CVV">
-            <input type="text" name="" id="name" placeholder="Name">
-            <input type="submit" name="" id="submitbtn" value="Submit">
-        </form>
+    <div id="container">
+        <div id="payment">
+            <h2>Enter Your Card Details</h2>
+            <form action="">
+                <input type="number" name="" id="cardnumber" placeholder="Card Number">
+                <input type="text" name="" id="expiredate" placeholder="MM/YY">
+                <input type="password" name="" id="cvv" placeholder="CVV">
+                <input type="text" name="" id="name" placeholder="Name">
+                <input type="submit" name="" id="submitbtn" value="Submit">
+            </form>
+        </div>
     </div>
 </body>
 <script>
@@ -49,19 +71,20 @@
             var otpbtn= document.createElement("button")
         otpbtn.innerText="Send OTP";
         otpbtn.setAttribute("id","otpsms")
-        var otpsms= document.createElement("input")
-        otpsms.setAttribute("type", "number")
-        otpsms.setAttribute("id", "sms")
+        
         document.getElementById("submitbtn").remove()
-        document.getElementById('payment').append(otpbtn,otpsms)
+        document.getElementById('payment').append(otpbtn)
     }
     document.getElementById('otpsms').addEventListener("click",function(){
         alert("Otp sent successfully")
         document.getElementById("otpsms").remove()
+        var otpsms= document.createElement("input")
+        otpsms.setAttribute("type", "number")
+        otpsms.setAttribute("id", "sms")
         var submitpayment= document.createElement('button')
         submitpayment.setAttribute('id','submitpaymentt')
         submitpayment.innerText="Submit"
-        document.getElementById('payment').append(submitpayment)
+        document.getElementById('payment').append(otpsms,submitpayment)
         alert("Your  OTP is 1234")
         document.getElementById("submitpaymentt").addEventListener('click', function(){
         var otpsms1= document.getElementById('sms').value
