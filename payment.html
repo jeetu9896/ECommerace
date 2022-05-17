@@ -34,9 +34,14 @@
             margin: auto;
             margin: 10px;
         }
-        #container>div>#otpsms{
+        #container>div>form>#otpsms{
             width: 40%;
             margin: auto;
+        }
+        #container>div>form>#submitpaymentt{
+            width: 40%;
+            margin: auto;
+            margin: 10px;
         }
         
     </style>
@@ -45,7 +50,7 @@
     <div id="container">
         <div id="payment">
             <h2>Enter Your Card Details</h2>
-            <form action="">
+            <form action="" id="paymentdetails">
                 <input type="number" name="" id="cardnumber" placeholder="Card Number">
                 <input type="text" name="" id="expiredate" placeholder="MM/YY">
                 <input type="password" name="" id="cvv" placeholder="CVV">
@@ -85,7 +90,7 @@
         otpbtn.setAttribute("id","otpsms")
         
         document.getElementById("submitbtn").remove()
-        document.getElementById('payment').append(otpbtn)
+        document.getElementById('paymentdetails').append(otpbtn)
     }
     document.getElementById('otpsms').addEventListener("click",function(){
         alert("Otp sent successfully")
@@ -96,7 +101,7 @@
         var submitpayment= document.createElement('button')
         submitpayment.setAttribute('id','submitpaymentt')
         submitpayment.innerText="Submit"
-        document.getElementById('payment').append(otpsms,submitpayment)
+        document.getElementById('paymentdetails').append(otpsms,submitpayment)
         alert("Your  OTP is 1234")
         document.getElementById("submitpaymentt").addEventListener('click', function(){
         var otpsms1= document.getElementById('sms').value
